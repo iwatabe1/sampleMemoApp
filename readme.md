@@ -64,4 +64,15 @@ To address all issues (including breaking changes), run:
 Run `npm audit` for details.
 Successfully created .eslintrc.json file in H:\projects\sampleMemoApp\sample-memo-app
 
+# prop types
+npm install prop-types
 
+
+# memo
+flex-boxが基本のレイアウト
+flex-directionがWebとは逆の作りになっている。
+
+<!-- React props -->
+Props(properties)
+
+PropTypes
