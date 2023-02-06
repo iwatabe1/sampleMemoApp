@@ -67,6 +67,9 @@ Successfully created .eslintrc.json file in H:\projects\sampleMemoApp\sample-mem
 # prop types
 npm install prop-types
 
+# prettier
+npm install -D prettier eslint-config-prettier eslint-plugin-prettier
+
 
 # memo
 flex-boxが基本のレイアウト
