@@ -10,6 +10,7 @@
     "lint": "eslint --ext  './**/*.{js,jsx,ts,tsx}'; stylelint './**/*.css'"
   },
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "expo": "~47.0.12",
     "expo-status-bar": "~1.4.2",
     "prop-types": "^15.8.1",

@@ -77,7 +77,16 @@ npm install prop-types
 
 # prettier
 
+.prettierrc.js
 npm install -D prettier eslint-config-prettier eslint-plugin-prettier
+
+# vector-icons
+
+npm install @expo/vector-icons
+https://icons.expo.fyi/
+https://docs.expo.dev/guides/icons/
+we haveto select feather icons
+sample plus,check,edit,×
 
 # memo
 

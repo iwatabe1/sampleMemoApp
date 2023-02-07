@@ -1,20 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { string, shape } from 'prop-types';
+import { View, StyleSheet } from 'react-native';
+import { string, shape, any } from 'prop-types';
+import { Feather } from '@expo/vector-icons';
 
 export default function CircleButton(props: any) {
-  const { children, style } = props;
+  const { style, name } = props;
   return (
     // 配列にしてスタイルを上書きできる
     <View style={[styles.circleButton, style]}>
-      <Text style={styles.circleButtonLabel}>{children}</Text>
+      <Feather name={name} size={32} color='white' />
     </View>
   );
 }
 
 CircleButton.prototypes = {
-  children: string.isRequired,
   style: shape(),
+  name: string.isRequired,
 };
 
 CircleButton.defaultProps = {
