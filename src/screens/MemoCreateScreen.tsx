@@ -5,17 +5,21 @@ import {
   TextInput,
   KeyboardAvoidingView,
 } from 'react-native';
-import AppBar from '../components/AppBar';
 import CircleButton from '../components/CircleButton';
 
-export default function MemoCreateScreen() {
+export default function MemoCreateScreen(props: any) {
+  const { navigation } = props;
   return (
     <KeyboardAvoidingView style={styles.container} behavior='height'>
-      <AppBar></AppBar>
       <View style={styles.inputContainer}>
         <TextInput value='' multiline style={styles.input}></TextInput>
       </View>
-      <CircleButton name='check'></CircleButton>
+      <CircleButton
+        name='check'
+        onPress={() => {
+          navigation.goBack();
+        }}
+      ></CircleButton>
     </KeyboardAvoidingView>
   );
 }
