@@ -88,10 +88,16 @@ https://docs.expo.dev/guides/icons/
 we haveto select feather icons
 sample plus,check,edit,×
 
+# use-fonts
+
+npm install @use-expo/font
+
 # memo
 
 flex-box が基本のレイアウト
 flex-direction が Web とは逆の作りになっている。
+Figma でアイコンを作って svg で保存、IcoMoon に登録。zip ファイルをダウンロードして使う。
+assets に入れる。
 
 <!-- React props -->
 
