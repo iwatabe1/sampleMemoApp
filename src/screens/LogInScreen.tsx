@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,19 +10,47 @@ import {
 
 import Button from '../components/Button';
 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from 'firebase/auth';
 
 export default function LogInScreen(props: any) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    console.log('useEffect');
+    return () => {
+      console.log('Unmount');
+    };
+  }, []);
+
+  // propsが変更されると実行される関数
+  useEffect(
+    () => {
+      const auth = getAuth();
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          navigation.reset({ index: 0, routes: [{ name: 'MemoList' }] });
+        }
+      });
+      // 画面を離れる前にユーザーのstateをキャンセルする
+      return unsubscribe;
+    },
+    // 空の配列を第二引数に入れて一度だけ実行されるようになる
+    [],
+  );
+
   function handlePress() {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
-        const { user } = userCredential;
+        const user = userCredential.user;
         console.log(user.uid);
         navigation.reset({ index: 0, routes: [{ name: 'MemoList' }] });
       })
