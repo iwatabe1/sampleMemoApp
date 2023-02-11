@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,12 +11,34 @@ import Button from '../components/Button';
 
 export default function SignUpScreen(props: any) {
   const { navigation } = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
-        <TextInput style={styles.input} value='email Address'></TextInput>
-        <TextInput style={styles.input} value='password'></TextInput>
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+          autoCapitalize='none' // 先頭大文字を解除
+          keyboardType='email-address'
+          placeholder={'Email-Address'}
+          textContentType='emailAddress' // iOSで登録されたデータを補完してくれる
+        ></TextInput>
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
+          autoCapitalize='none'
+          placeholder={'Password'}
+          secureTextEntry // パスワードをマスキング
+          textContentType='password' // iOSで登録されたデータを補完してくれる
+        ></TextInput>
         <Button
           label='Submit'
           onPress={() => {
