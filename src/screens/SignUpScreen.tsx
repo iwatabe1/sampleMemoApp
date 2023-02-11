@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,21 +7,51 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import AppBar from '../components/AppBar';
 import Button from '../components/Button';
 
-export default function SignUpScreen() {
+export default function SignUpScreen(props: any) {
+  const { navigation } = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.container}>
-      <AppBar />
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
-        <TextInput style={styles.input} value='email Address'></TextInput>
-        <TextInput style={styles.input} value='password'></TextInput>
-        <Button label='Submit' />
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+          autoCapitalize='none' // 先頭大文字を解除
+          keyboardType='email-address'
+          placeholder={'Email-Address'}
+          textContentType='emailAddress' // iOSで登録されたデータを補完してくれる
+        ></TextInput>
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
+          autoCapitalize='none'
+          placeholder={'Password'}
+          secureTextEntry // パスワードをマスキング
+          textContentType='password' // iOSで登録されたデータを補完してくれる
+        ></TextInput>
+        <Button
+          label='Submit'
+          onPress={() => {
+            navigation.reset({ index: 0, routes: [{ name: 'MemoList' }] });
+          }}
+        />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registered?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.reset({ index: 0, routes: [{ name: 'LogIn' }] });
+            }}
+          >
             <Text style={styles.footerLink}>Log In.</Text>
           </TouchableOpacity>
         </View>
