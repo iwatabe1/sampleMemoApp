@@ -16,12 +16,17 @@ import MemoCreateScreen from './src/screens/MemoCreateScreen';
 import LogInScreen from './src/screens/LogInScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import { firebaseConfig } from './src/config/env';
-import { getAuth } from 'firebase/auth';
+// import { getAuth } from 'firebase/auth';
+// import { getFirestore } from 'firebase/firestore';
+
+// require('firebase/firestore');
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+// const auth = getAuth(app);
+// Initialize Cloud Firestore and get a reference to the service
+// const db = getFirestore(app);
 
 const Stack = createStackNavigator();
 
