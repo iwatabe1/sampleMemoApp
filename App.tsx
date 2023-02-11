@@ -16,6 +16,7 @@ import MemoCreateScreen from './src/screens/MemoCreateScreen';
 import LogInScreen from './src/screens/LogInScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import { firebaseConfig } from './src/config/env';
+import { getAuth } from 'firebase/auth';
 
 const Stack = createStackNavigator();
 
@@ -28,14 +29,17 @@ const Stack = createStackNavigator();
 //   console.log(e);
 // }
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
 
 export default function App() {
   // 画面のコンポーネント
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName='SignUp'
+        initialRouteName='LogIn'
         screenOptions={{
           headerStyle: { backgroundColor: '#467FD3' },
           headerTitleStyle: { color: '#ffffff' },
