@@ -5,6 +5,9 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
+// import firebase from 'firebase';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from 'firebase/app';
 
 import MemoListScreen from './src/screens/MemoListScreen';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
@@ -12,8 +15,20 @@ import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoCreateScreen from './src/screens/MemoCreateScreen';
 import LogInScreen from './src/screens/LogInScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
+import { firebaseConfig } from './src/config/env';
 
 const Stack = createStackNavigator();
+
+// 初期化されていない場合
+// try {
+//   if (firebase.apps.length === 0) {
+//     firebase.initializeApp(firebaseConfig);
+//   }
+// } catch (e) {
+//   console.log(e);
+// }
+
+const app = initializeApp(firebaseConfig);
 
 export default function App() {
   // 画面のコンポーネント

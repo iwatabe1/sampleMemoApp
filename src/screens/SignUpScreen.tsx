@@ -5,14 +5,35 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 
 import Button from '../components/Button';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 export default function SignUpScreen(props: any) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  function handlePress() {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      // 会員登録に成功した場合
+      .then((userCredential) => {
+        // Sing Up
+        const { user } = userCredential;
+        console.log(user.uid);
+        navigation.reset({ index: 0, routes: [{ name: 'MemoList' }] });
+      })
+      // catch しないと正常に稼働しない。
+      .catch((error) => {
+        console.log(error.code);
+        console.log(error.message);
+        Alert.alert(error.code);
+      });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
@@ -39,12 +60,7 @@ export default function SignUpScreen(props: any) {
           secureTextEntry // パスワードをマスキング
           textContentType='password' // iOSで登録されたデータを補完してくれる
         ></TextInput>
-        <Button
-          label='Submit'
-          onPress={() => {
-            navigation.reset({ index: 0, routes: [{ name: 'MemoList' }] });
-          }}
-        />
+        <Button label='Submit' onPress={handlePress} />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registered?</Text>
           <TouchableOpacity
