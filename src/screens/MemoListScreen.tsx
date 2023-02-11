@@ -36,6 +36,7 @@ export default function MemoListScreen(props: any) {
         collection(db, `users/${auth.currentUser.uid}/memos`),
         orderBy('updatedAt', 'desc'),
       );
+      // onSnapshotを使うとデータ更新を監視できる
       unsubscribe = onSnapshot(
         ref,
         (snapshot) => {
