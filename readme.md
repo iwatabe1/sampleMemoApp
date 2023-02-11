@@ -90,22 +90,27 @@ sample plus,check,edit,×
 
 # use-fonts
 
-$ npm install @use-expo/font
+npm install @use-expo/font
 
 # React-Navigation:不安定なバージョンがあることもある。
 
-$ npm install @react-navigation/native@6.1.3
+npm install @react-navigation/native@6.1.3
 
 依存関係のインストール
 https://reactnavigation.org/docs/getting-started#installing-dependencies-into-an-expo-managed-project
-$ npx expo install react-native-screens react-native-safe-area-context
+npx expo install react-native-screens react-native-safe-area-context
 
 ・Navigator のインストール
 https://reactnavigation.org/docs/hello-react-navigation#installing-the-native-stack-navigator-library
 
 <!-- $ npm install @react-navigation/native-stack -->
 
-$ npm install @react-navigation/stack
+npm install @react-navigation/stack
+
+# firebase
+
+npm install firebase@9.17.1
+npm install firebase-admin
 
 # memo
 

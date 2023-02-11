@@ -18,21 +18,12 @@ import SignUpScreen from './src/screens/SignUpScreen';
 import { firebaseConfig } from './src/config/env';
 import { getAuth } from 'firebase/auth';
 
-const Stack = createStackNavigator();
-
-// 初期化されていない場合
-// try {
-//   if (firebase.apps.length === 0) {
-//     firebase.initializeApp(firebaseConfig);
-//   }
-// } catch (e) {
-//   console.log(e);
-// }
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
+
+const Stack = createStackNavigator();
 
 export default function App() {
   // 画面のコンポーネント

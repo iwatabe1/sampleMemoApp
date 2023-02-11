@@ -20,9 +20,7 @@ export default function MemoListScreen(props: any) {
         onPress={() => {
           navigation.navigate('MemoCreate');
         }}
-      >
-        +
-      </CircleButton>
+      />
     </View>
   );
 }
