@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { shape, string, instanceOf, arrayOf } from 'prop-types';
+import { dateToString } from '../utils/DateUtil';
 
 export default function MemoList(props: any) {
   const { memos } = props;
@@ -20,14 +21,16 @@ export default function MemoList(props: any) {
       <TouchableOpacity
         style={styles.memoListItem}
         onPress={() => {
-          navigation.navigate('MemoDetail' as never);
+          navigation.navigate('MemoDetail' as never, { id: item.id } as never);
         }}
       >
         <View>
           <Text style={styles.memoListItemTitle} numberOfLines={1}>
             {item.bodyText}
           </Text>
-          <Text style={styles.memoListItemDate}>{String(item.updatedAt)}</Text>
+          <Text style={styles.memoListItemDate}>
+            {dateToString(item.updatedAt)}
+          </Text>
         </View>
         <TouchableOpacity
           style={styles.memoDelete}

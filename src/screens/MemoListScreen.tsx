@@ -11,11 +11,12 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-import { Memos } from '../type/memos';
+import { Memos } from '../types/memos';
 
 export default function MemoListScreen(props: any) {
   const { navigation } = props;
   const [memos, setMemos] = useState([] as any);
+
   // ログインボタンの呼び出し
   useEffect(() => {
     console.log('useEffect');
