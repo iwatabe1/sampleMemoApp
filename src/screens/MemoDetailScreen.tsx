@@ -35,7 +35,7 @@ export default function MemoDetailScreen(props: any) {
   return (
     <View style={styles.container}>
       <View style={styles.memoHeader}>
-        <Text style={styles.memoTitle} numberOfLines={1}>
+        <Text style={styles.memoTitle} numberOfLines={1} ellipsizeMode='tail'>
           {memo && memo.bodyText}
         </Text>
         <Text style={styles.memoDate}>
@@ -49,7 +49,10 @@ export default function MemoDetailScreen(props: any) {
         style={{ top: 60, bottom: 'auto' }}
         name={'edit-2'}
         onPress={() => {
-          navigation.navigate('MemoEdit');
+          navigation.navigate('MemoEdit', {
+            id: memo.id,
+            bodyText: memo.bodyText,
+          });
         }}
       />
     </View>

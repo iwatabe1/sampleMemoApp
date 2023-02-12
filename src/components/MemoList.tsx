@@ -25,7 +25,11 @@ export default function MemoList(props: any) {
         }}
       >
         <View>
-          <Text style={styles.memoListItemTitle} numberOfLines={1}>
+          <Text
+            style={styles.memoListItemTitle}
+            numberOfLines={1}
+            ellipsizeMode='tail'
+          >
             {item.bodyText}
           </Text>
           <Text style={styles.memoListItemDate}>
