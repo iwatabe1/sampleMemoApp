@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { LogBox } from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {
@@ -29,6 +29,9 @@ const app = initializeApp(firebaseConfig);
 // const db = getFirestore(app);
 
 const Stack = createStackNavigator();
+
+// Androidの警告表示を消す場合
+// LogBox.ignoreLogs(['AsyncStorage']);
 
 export default function App() {
   // 画面のコンポーネント
@@ -72,11 +75,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-// CSSのコンポーネント
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F4F4F8',
-  },
-});
