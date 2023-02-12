@@ -22,13 +22,6 @@ export default function LogInScreen(props: any) {
   const [isLoading, setLoading] = useState(true);
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    console.log('useEffect');
-    return () => {
-      console.log('Unmount');
-    };
-  }, []);
-
   // propsが変更されると実行される関数
   useEffect(
     () => {
@@ -45,6 +38,7 @@ export default function LogInScreen(props: any) {
       return unsubscribe;
     },
     // 空の配列を第二引数に入れて一度だけ実行されるようになる
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
@@ -52,10 +46,8 @@ export default function LogInScreen(props: any) {
     setLoading(true);
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(() => {
         // Signed in
-        const user = userCredential.user;
-        console.log(user.uid);
         navigation.reset({ index: 0, routes: [{ name: 'MemoList' }] });
       })
       .catch((error) => {

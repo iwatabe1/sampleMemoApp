@@ -21,10 +21,8 @@ export default function SignUpScreen(props: any) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       // 会員登録に成功した場合
-      .then((userCredential) => {
+      .then(() => {
         // Sing Up
-        const { user } = userCredential;
-        console.log(user.uid);
         navigation.reset({ index: 0, routes: [{ name: 'MemoList' }] });
       })
       // catch しないと正常に稼働しない。

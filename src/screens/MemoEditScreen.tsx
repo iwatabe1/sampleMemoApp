@@ -7,11 +7,10 @@ import {
   Alert,
 } from 'react-native';
 import { getAuth } from 'firebase/auth';
-import { collection, doc, getFirestore, setDoc } from 'firebase/firestore';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import { shape, string } from 'prop-types';
 
 import CircleButton from '../components/CircleButton';
-import { dateToString } from '../utils/DateUtil';
 import { translateErrors } from '../utils/handleErrors';
 
 export default function MemoEditScreen(props: any) {

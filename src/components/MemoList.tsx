@@ -18,7 +18,7 @@ export default function MemoList(props: any) {
   const { memos } = props;
   const navigation = useNavigation();
 
-  function deleteMemo(id) {
+  function deleteMemo(id: any) {
     const auth = getAuth();
     if (auth.currentUser) {
       const db = getFirestore();

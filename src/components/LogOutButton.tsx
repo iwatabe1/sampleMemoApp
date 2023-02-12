@@ -13,9 +13,8 @@ export default function LogOutButton() {
         // Sign-out successful.
         navigation.reset({ index: 0, routes: [{ name: 'LogIn' }] as never });
       })
-      .catch((error) => {
+      .catch(() => {
         // An error happened.
-        console.log(error.code);
         Alert.alert('ログアウトに失敗しました。');
       });
   }
