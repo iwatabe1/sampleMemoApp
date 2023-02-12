@@ -45,26 +45,32 @@ export default function MemoListScreen(props: any) {
           orderBy('updatedAt', 'desc'),
         );
         // onSnapshotを使うとデータ更新を監視できる
-        unsubscribe = onSnapshot(
-          ref,
-          (snapshot) => {
-            const userMemos: Memos[] = [];
-            snapshot.forEach((doc) => {
-              const data = doc.data();
-              userMemos.push({
-                id: doc.id,
-                bodyText: data.bodyText,
-                updatedAt: data.updatedAt.toDate(),
+        try {
+          unsubscribe = onSnapshot(
+            ref,
+            (snapshot) => {
+              const userMemos: Memos[] = [];
+              snapshot.forEach((doc) => {
+                const data = doc.data();
+                userMemos.push({
+                  id: doc.id,
+                  bodyText: data.bodyText,
+                  updatedAt: data.updatedAt.toDate(),
+                });
               });
-            });
-            setMemos(userMemos);
-            setLoading(false);
-          },
-          () => {
-            setLoading(false);
-            Alert.alert('データの読み込みに失敗しました。');
-          },
-        );
+              setMemos(userMemos);
+              // setLoading(false);
+            },
+            (e) => {
+              // setLoading(false);
+            },
+          );
+        } catch (e) {
+          console.error(e);
+          Alert.alert('データの読み込みに失敗しました。');
+        } finally {
+          setLoading(false);
+        }
         return unsubscribe;
       }
     },

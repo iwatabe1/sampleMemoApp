@@ -16,6 +16,7 @@
     "@react-navigation/stack": "^6.3.12",
     "@use-expo/font": "^2.0.0",
     "date-fns": "^2.29.3",
+    "eas-cli": "^3.5.2",
     "expo": "~47.0.12",
     "expo-status-bar": "~1.4.2",
     "firebase": "^9.17.1",
