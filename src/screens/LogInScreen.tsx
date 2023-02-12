@@ -7,18 +7,18 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-
 import Button from '../components/Button';
-
 import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from 'firebase/auth';
+import Loading from '../components/Loading';
 
 export default function LogInScreen(props: any) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
+  const [isLoading, setLoading] = useState(true);
   const [password, setPassword] = useState('');
 
   useEffect(() => {
@@ -36,6 +36,8 @@ export default function LogInScreen(props: any) {
         if (user) {
           // User is signed in, see docs for a list of available properties
           navigation.reset({ index: 0, routes: [{ name: 'MemoList' }] });
+        } else {
+          setLoading(false);
         }
       });
       // 画面を離れる前にユーザーのstateをキャンセルする
@@ -46,6 +48,7 @@ export default function LogInScreen(props: any) {
   );
 
   function handlePress() {
+    setLoading(true);
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -58,11 +61,15 @@ export default function LogInScreen(props: any) {
         console.log(error.code);
         console.log(error.message);
         Alert.alert(error.code);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
   return (
     <View style={styles.container}>
+      <Loading isLoading={isLoading} />
       <View style={styles.inner}>
         <Text style={styles.title}>Log In</Text>
         <TextInput
