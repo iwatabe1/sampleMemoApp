@@ -4,12 +4,14 @@ import {
   StyleSheet,
   TextInput,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
 import CircleButton from '../components/CircleButton';
 
 import { collection, addDoc } from 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { translateErrors } from '../utils/handleErrors';
 
 export default function MemoCreateScreen(props: any) {
   const { navigation } = props;
@@ -19,17 +21,15 @@ export default function MemoCreateScreen(props: any) {
     try {
       const auth = getAuth();
       const db = getFirestore();
-      const docRef = await addDoc(
-        collection(db, `users/${auth.currentUser?.uid}/memos`),
-        {
-          bodyText,
-          updatedAt: new Date(),
-        },
-      );
-      console.log('Document written with ID: ', docRef.id);
+      await addDoc(collection(db, `users/${auth.currentUser?.uid}/memos`), {
+        bodyText,
+        updatedAt: new Date(),
+      });
       navigation.goBack();
-    } catch (error) {
+    } catch (error: any) {
+      const errorMsg = translateErrors(error.code);
       console.error('Error adding document: ', error);
+      Alert.alert(errorMsg.title, errorMsg.description);
     }
   }
 

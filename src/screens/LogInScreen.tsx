@@ -14,19 +14,13 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import Loading from '../components/Loading';
+import { translateErrors } from '../utils/handleErrors';
 
 export default function LogInScreen(props: any) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
   const [isLoading, setLoading] = useState(true);
   const [password, setPassword] = useState('');
-
-  useEffect(() => {
-    console.log('useEffect');
-    return () => {
-      console.log('Unmount');
-    };
-  }, []);
 
   // propsが変更されると実行される関数
   useEffect(
@@ -44,6 +38,7 @@ export default function LogInScreen(props: any) {
       return unsubscribe;
     },
     // 空の配列を第二引数に入れて一度だけ実行されるようになる
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
@@ -51,16 +46,13 @@ export default function LogInScreen(props: any) {
     setLoading(true);
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(() => {
         // Signed in
-        const user = userCredential.user;
-        console.log(user.uid);
         navigation.reset({ index: 0, routes: [{ name: 'MemoList' }] });
       })
       .catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
-        Alert.alert(error.code);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
       })
       .finally(() => {
         setLoading(false);

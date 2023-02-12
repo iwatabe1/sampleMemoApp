@@ -21,52 +21,56 @@ export default function MemoListScreen(props: any) {
   const [isLoading, setLoading] = useState(false);
 
   // ログインボタンの呼び出し
-  useEffect(() => {
-    console.log('useEffect');
-    navigation.setOptions({
-      headerRight: () => <LogOutButton />,
-    });
-  }, []);
+  useEffect(
+    () => {
+      navigation.setOptions({
+        headerRight: () => <LogOutButton />,
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   // MemoListデータ取得
-  useEffect(() => {
-    console.log('useEffect');
-    const db = getFirestore();
-    const auth = getAuth();
-    let unsubscribe;
+  useEffect(
+    () => {
+      const db = getFirestore();
+      const auth = getAuth();
+      let unsubscribe;
 
-    if (auth.currentUser) {
-      setLoading(true);
-      const ref = query(
-        collection(db, `users/${auth.currentUser.uid}/memos`),
-        orderBy('updatedAt', 'desc'),
-      );
-      // onSnapshotを使うとデータ更新を監視できる
-      unsubscribe = onSnapshot(
-        ref,
-        (snapshot) => {
-          const userMemos: Memos[] = [];
-          snapshot.forEach((doc) => {
-            const data = doc.data();
-            console.log(doc.id, doc.data());
-            userMemos.push({
-              id: doc.id,
-              bodyText: data.bodyText,
-              updatedAt: data.updatedAt.toDate(),
+      if (auth.currentUser) {
+        setLoading(true);
+        const ref = query(
+          collection(db, `users/${auth.currentUser.uid}/memos`),
+          orderBy('updatedAt', 'desc'),
+        );
+        // onSnapshotを使うとデータ更新を監視できる
+        unsubscribe = onSnapshot(
+          ref,
+          (snapshot) => {
+            const userMemos: Memos[] = [];
+            snapshot.forEach((doc) => {
+              const data = doc.data();
+              userMemos.push({
+                id: doc.id,
+                bodyText: data.bodyText,
+                updatedAt: data.updatedAt.toDate(),
+              });
             });
-          });
-          setMemos(userMemos);
-          setLoading(false);
-        },
-        (e) => {
-          setLoading(false);
-          console.log(e);
-          Alert.alert('データの読み込みに失敗しました。');
-        },
-      );
-      return unsubscribe;
-    }
-  }, []);
+            setMemos(userMemos);
+            setLoading(false);
+          },
+          () => {
+            setLoading(false);
+            Alert.alert('データの読み込みに失敗しました。');
+          },
+        );
+        return unsubscribe;
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   if (memos.length === 0) {
     return (

@@ -10,27 +10,29 @@ import { dateToString } from '../utils/DateUtil';
 export default function MemoDetailScreen(props: any) {
   const { navigation, route } = props;
   const { id } = route.params;
-  console.log(id);
   const [memo, setMemo] = useState({} as Memos);
 
-  useEffect(() => {
-    const auth = getAuth();
-    const db = getFirestore();
-    let unsubscribe;
-    if (auth.currentUser) {
-      const ref = doc(db, `users/${auth.currentUser.uid}/memos`, id);
-      unsubscribe = onSnapshot(ref, (doc) => {
-        console.log(doc.id, doc.data());
-        const data = doc.data();
-        setMemo({
-          id: id,
-          bodyText: data?.bodyText,
-          updatedAt: data?.updatedAt.toDate(),
+  useEffect(
+    () => {
+      const auth = getAuth();
+      const db = getFirestore();
+      let unsubscribe;
+      if (auth.currentUser) {
+        const ref = doc(db, `users/${auth.currentUser.uid}/memos`, id);
+        unsubscribe = onSnapshot(ref, (doc) => {
+          const data = doc.data();
+          setMemo({
+            id: id,
+            bodyText: data?.bodyText,
+            updatedAt: data?.updatedAt.toDate(),
+          });
         });
-      });
-    }
-    return unsubscribe;
-  }, []);
+      }
+      return unsubscribe;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   return (
     <View style={styles.container}>
