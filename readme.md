@@ -112,6 +112,10 @@ npm install @react-navigation/stack
 npm install firebase@9.17.1
 npm install firebase-admin
 
+# date 型の変換
+
+npm install date-fns@2.29.3
+
 # memo
 
 flex-box が基本のレイアウト
