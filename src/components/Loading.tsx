@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { bool } from 'prop-types';
 
-export default function Loading(props) {
+export default function Loading(props: any) {
   const { isLoading } = props;
   if (!isLoading) {
     return null;

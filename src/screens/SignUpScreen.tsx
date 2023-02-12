@@ -10,6 +10,7 @@ import {
 
 import Button from '../components/Button';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { translateErrors } from '../utils/handleErrors';
 
 export default function SignUpScreen(props: any) {
   const { navigation } = props;
@@ -28,9 +29,8 @@ export default function SignUpScreen(props: any) {
       })
       // catch しないと正常に稼働しない。
       .catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
-        Alert.alert(error.code);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
       });
   }
 

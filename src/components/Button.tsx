@@ -14,7 +14,7 @@ export default function Button(props: any) {
 Button.propTypes = {
   label: string.isRequired,
   onPress: func,
-  style: shape(),
+  style: shape({}),
 };
 
 Button.defaultProps = {

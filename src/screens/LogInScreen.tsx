@@ -14,6 +14,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import Loading from '../components/Loading';
+import { translateErrors } from '../utils/handleErrors';
 
 export default function LogInScreen(props: any) {
   const { navigation } = props;
@@ -58,9 +59,8 @@ export default function LogInScreen(props: any) {
         navigation.reset({ index: 0, routes: [{ name: 'MemoList' }] });
       })
       .catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
-        Alert.alert(error.code);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
       })
       .finally(() => {
         setLoading(false);

@@ -12,6 +12,7 @@ import { shape, string } from 'prop-types';
 
 import CircleButton from '../components/CircleButton';
 import { dateToString } from '../utils/DateUtil';
+import { translateErrors } from '../utils/handleErrors';
 
 export default function MemoEditScreen(props: any) {
   const { navigation, route } = props;
@@ -28,7 +29,8 @@ export default function MemoEditScreen(props: any) {
           navigation.goBack();
         })
         .catch((e) => {
-          Alert.alert(e.code);
+          const errorMsg = translateErrors(e.code);
+          Alert.alert(errorMsg.title, errorMsg.description);
         });
     }
   }
