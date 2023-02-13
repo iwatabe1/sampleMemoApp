@@ -116,6 +116,9 @@ npm install firebase-admin
 
 npm install date-fns@2.29.3
 
+# EAS
+ npm install eas-cli
+ビルドツール
 # memo
 
 flex-box が基本のレイアウト
